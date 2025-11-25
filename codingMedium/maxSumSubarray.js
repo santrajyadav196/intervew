@@ -25,3 +25,26 @@ function maxSumSubarray(arr) {
 }
 
 console.log(maxSumSubarray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // Expected output: 6
+
+function maxSumSubarray(nums, k) {
+  let windowSum = 0;
+  let maxSum = -Infinity;
+  let start = 0;
+
+  for (let i = 0; i < k; i++) {
+    windowSum += nums[i];
+  }
+
+  maxSum = windowSum;
+
+  for (let end = k; end < nums.length; end++) {
+    windowSum += nums[end];
+    windowSum -= nums[start];
+    start++;
+
+    maxSum = Math.max(maxSum, windowSum);
+  }
+  return maxSum;
+}
+
+console.log(maxSumSubarray([2, 1, 5, 1, 3, 2], 3));
